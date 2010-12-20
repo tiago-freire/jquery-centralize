@@ -19,7 +19,6 @@ jQuery.fn.extend({
 			var margin = Math.floor((totalWidth - (count * averageWidth)) / (count + 1));
 
 			children.css('margin-left', margin + 'px');
-
 		}).each(function() {
 			if(this.complete || ($.browser.msie && parseInt($.browser.version) == 6)) {
 				$(this).trigger("load");
