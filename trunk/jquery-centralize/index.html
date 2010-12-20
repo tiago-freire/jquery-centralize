@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+	<head>
+		<title>jQuery-Centralize</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery-centralize-0.1.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$('#btn-centralize').click(function() {
+					$('#content img').centralize();
+				});
+			});
+		</script>
+		<style type="text/css">
+			* {float: left; font: normal 19px arial; margin: 0; padding: 0;}
+			body {float: left; width: 100%;}
+			#content {float: left; width: 90%; margin: 2% 5%; border: #000 solid 1px; padding: 10px 10px 0;}
+			#content img {margin-bottom: 10px;}
+		</style>
+	</head>
+	<body>
+		<div id="content">
+			<img src="images/250x200.jpg" title="150 x 200" alt="150 x 200" />
+			<img src="images/250x200.jpg" title="150 x 200" alt="150 x 200" />
+			<img src="images/150x200.jpg" title="150 x 200" alt="150 x 200" />
+		</div>
+		<input id="btn-centralize" type="button" value="Centralize it!" />
+	</body>
+</html>
