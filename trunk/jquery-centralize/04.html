@@ -8,7 +8,7 @@
 		<script type="text/javascript">
 			$(function() {
 				$('#btn-centralize').click(function() {
-					$('#content a').centralize();
+					$('#content img, #content object').centralize();
 				});
 			});
 		</script>
@@ -17,15 +17,15 @@
 			body {float: left; width: 100%;}
 			#content {float: left; width: 90%; margin: 2% 5%; border: #000 solid 1px; padding: 10px 0 0;}
 			#btn-centralize {float:left; margin-left: 5%; width: 150px; padding: 2px; font-weight: bold;}
-			#content a {float: left; width: 200px; margin-bottom: 10px; border: #000 solid 1px;}
+			#content img {float: left; margin-bottom: 10px; border: #000 solid 1px;}
+			#content span {border: red dashed 2px;}
 		</style>
 	</head>
 	<body>
 		<div id="content">
-			<a href="01.html" title="Single element">Single elemeeeent</a>
-			<a href="02.html" title="Multiple elements with same width">Multiple elements with same width</a>
-			<a href="03.html" title="Multiple elements with different widths">Multiple elements with different widths</a>
-			<a href="04.html" title="Multiple element types">Multiple element types</a>
+			<img src="images/150x200.jpg" />
+			<object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/l5OwprpwnuE?fs=1&amp;hl=pt_BR"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/l5OwprpwnuE?fs=1&amp;hl=pt_BR" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>
+			<img src="images/250x200.jpg" />
 		</div>
 		<input id="btn-centralize" type="button" value="Centralize it!" />
 	</body>

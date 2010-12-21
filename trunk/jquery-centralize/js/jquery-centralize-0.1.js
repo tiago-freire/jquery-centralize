@@ -3,22 +3,27 @@ jQuery.fn.extend({
 		var children = this;
 		var totalWidth = children.parent().width();
 		
-		children.load(function() {
+		children.parent().find('img').load(function() {
 			var totalCount = children.length;
 			var sumWidth = 0;
 			children.each(function() {
 				$(this).css('float', 'left');
-				sumWidth += $(this).outerWidth();
+				if($(this).outerWidth() > 0) {
+					sumWidth += $(this).outerWidth();
+				}
+				console.log('outerWidth = ' + $(this).outerWidth());
 			});
 
 			var averageWidth = sumWidth / totalCount;
 
 			var maxCountByLine = Math.floor(totalWidth / averageWidth);
-			var count = totalCount > maxCountByLine ? maxCountByLine : totalCount;
+			console.log('maxCountByLine = ' + maxCountByLine);
+			var count = maxCountByLine < totalCount ? maxCountByLine : totalCount;
+			console.log('count = ' + count);
 
-			var margin = Math.floor((totalWidth - (count * averageWidth)) / (count + 1));
+			var marginLeft = Math.floor((totalWidth - (count * averageWidth)) / (count + 1));
 
-			children.css('margin-left', margin + 'px');
+			children.css('margin-left', marginLeft + 'px');
 		}).each(function() {
 			if(this.complete || ($.browser.msie && parseInt($.browser.version) == 6)) {
 				$(this).trigger("load");
