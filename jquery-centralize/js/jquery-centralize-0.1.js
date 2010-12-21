@@ -4,24 +4,26 @@ jQuery.fn.extend({
 		var totalWidth = children.parent().width();
 		
 		children.parent().find('img').load(function() {
-			var totalCount = children.length;
+			var totalCount = 0;
 			var sumWidth = 0;
 			children.each(function() {
 				$(this).css('float', 'left');
 				if($(this).outerWidth() > 0) {
 					sumWidth += $(this).outerWidth();
+					totalCount++;
 				}
-				console.log('outerWidth = ' + $(this).outerWidth());
 			});
 
 			var averageWidth = sumWidth / totalCount;
 
 			var maxCountByLine = Math.floor(totalWidth / averageWidth);
-			console.log('maxCountByLine = ' + maxCountByLine);
 			var count = maxCountByLine < totalCount ? maxCountByLine : totalCount;
+			console.log('totalCount = ' + totalCount);
+			console.log('maxCountByLine = ' + maxCountByLine);
 			console.log('count = ' + count);
 
 			var marginLeft = Math.floor((totalWidth - (count * averageWidth)) / (count + 1));
+			console.log('marginLeft = ' + marginLeft);
 
 			children.css('margin-left', marginLeft + 'px');
 		}).each(function() {
