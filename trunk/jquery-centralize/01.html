@@ -5,6 +5,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 		<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
 		<script type="text/javascript" src="js/jquery-centralize-0.1.js"></script>
+		<link href="css/style.css" rel="stylesheet" type="text/css" media="screen" />
 		<script type="text/javascript">
 			$(function() {
 				$('#btn-centralize').click(function() {
@@ -12,19 +13,12 @@
 				});
 			});
 		</script>
-		<style type="text/css">
-			* {margin:0; padding:0; font-family:Verdana; font-size:12px; color:#000; }
-			body {float: left; width: 100%;}
-			#content {float: left; width: 90%; margin: 2% 5%; border: #000 solid 1px; padding: 10px 0 0;}
-			#btn-centralize {float:left; margin-left: 5%; width: 150px; padding: 2px; font-weight: bold;}
-			#content img {float: left; margin-bottom: 10px; border: #000 solid 1px;}
-			#content span {border: red dashed 2px;}
-		</style>
 	</head>
 	<body>
+		<input class="btn" type="button" value="<< Home" onclick="location.href='index.html'" />
 		<div id="content">
 			<img src="images/250x200.jpg" />
 		</div>
-		<input id="btn-centralize" type="button" value="Centralize it!" />
+		<input class="btn" id="btn-centralize" type="button" value="Centralize it!" />
 	</body>
 </html>
