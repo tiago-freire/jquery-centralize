@@ -1,9 +1,9 @@
 jQuery.fn.extend({
 	centralize: function() {
-		var children = this;
-		var totalWidth = children.parent().width();
+		var children = $(this).children();
+		var totalWidth = $(this).width();
 		console.log('totalWidth = ' + totalWidth);
-		var images = children.parent().find('img');
+		var images = $(this).children('img');
 		var countImagesLoaded = 0;
 		var calculateMarginLeft = function(totalWidth, count, averageWidth) {
 			return Math.floor((totalWidth - (count * averageWidth)) / (count + 1));
@@ -24,10 +24,11 @@ jQuery.fn.extend({
 			var sumWidth = 0;
 			
 			children.each(function() {
-				jQuery(this).css('float', 'left');
+				var eachWidth = jQuery(this).outerWidth();
 				console.log('jQuery(this).outerWidth() = ' + jQuery(this).outerWidth());
-				if(jQuery(this).outerWidth() > 0) {
-					sumWidth += jQuery(this).outerWidth();
+				if(eachWidth > 0) {
+					jQuery(this).css('float', 'left');
+					sumWidth += eachWidth;
 					totalCount++;
 				}
 			});
@@ -45,9 +46,9 @@ jQuery.fn.extend({
 			console.log('marginLeft = ' + marginLeft);
 			var ratio = (totalWidth - (count * (marginLeft + averageWidth) + marginLeft)) / count;
 			console.log('ratio = ' + ratio);
-			if(ratio > 0 && ratio < 1) {
+			if(ratio > 0.0 && ratio < 0.5) {
 				marginLeft = calculateMarginLeft(totalWidth, --count, averageWidth);
-				console.log('marginLeft = ' + marginLeft);
+				console.log('NEW marginLeft = ' + marginLeft);
 			}
 
 			children.css('margin-left', marginLeft + 'px');
