@@ -51,7 +51,7 @@ jQuery.fn.extend({
 				console.log('NEW marginLeft = ' + marginLeft);
 			}
 
-			children.css('margin-left', marginLeft + 'px');
+			children.css({'margin-left': marginLeft + 'px', 'margin-top': marginLeft + 'px'});
 		}
 	}
 });
