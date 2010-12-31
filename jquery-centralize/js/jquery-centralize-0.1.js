@@ -10,9 +10,7 @@ jQuery.fn.extend({
 		}
 
 		images.each(function() {
-			jQuery(this).load(function() {
-				countImagesLoaded++;
-			});
+			jQuery(this).load(function() { countImagesLoaded++; });
 
 			if(this.complete || (jQuery.browser.msie && parseInt(jQuery.browser.version) == 6)) {
 				jQuery(this).trigger("load");
@@ -46,12 +44,20 @@ jQuery.fn.extend({
 			console.log('marginLeft = ' + marginLeft);
 			var ratio = (totalWidth - (count * (marginLeft + averageWidth) + marginLeft)) / count;
 			console.log('ratio = ' + ratio);
-			if(ratio > 0.0 && ratio < 0.5) {
+			if(ratio > 0 && ratio < 1) {
 				marginLeft = calculateMarginLeft(totalWidth, --count, averageWidth);
 				console.log('NEW marginLeft = ' + marginLeft);
 			}
+			
+			var newProperties = {};
+			newProperties['margin-left'] = marginLeft;
+			if(maxCountByLine < totalCount) {
+				newProperties['margin-top'] = marginLeft;
+			} else {
+				newProperties['margin-top'] = Math.floor(marginLeft / 5);
+			}
 
-			children.css({'margin-left': marginLeft + 'px', 'margin-top': marginLeft + 'px'});
+			children.css(newProperties);
 		}
 	}
 });
