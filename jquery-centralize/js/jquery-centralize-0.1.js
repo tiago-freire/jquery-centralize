@@ -1,13 +1,25 @@
 jQuery.fn.extend({
-	centralize: function() {
-		var children = $(this).children();
-		var totalWidth = $(this).width();
+	centralize: function(parameters) {
+		var defaultOptions = {
+			verticalSpace: ''
+		}
+		
+		var options = jQuery.extend(defaultOptions, parameters);
+		
+		var parent = $(this);
+		var children = parent.children();
+		var totalWidth = parent.width();
 		console.log('totalWidth = ' + totalWidth);
-		var images = $(this).children('img');
+		var images = parent.children('img');
 		var countImagesLoaded = 0;
+		
 		var calculateMarginLeft = function(totalWidth, count, averageWidth) {
 			return Math.floor((totalWidth - (count * averageWidth)) / (count + 1));
-		}
+		};
+		
+		var calculateRatio = function(totalWidth, count, averageWidth, marginLeft) {
+			return (totalWidth - (count * (marginLeft + averageWidth) + marginLeft)) / count;
+		};
 
 		images.each(function() {
 			jQuery(this).load(function() { countImagesLoaded++; });
@@ -42,20 +54,29 @@ jQuery.fn.extend({
 
 			var marginLeft = calculateMarginLeft(totalWidth, count, averageWidth);
 			console.log('marginLeft = ' + marginLeft);
-			var ratio = (totalWidth - (count * (marginLeft + averageWidth) + marginLeft)) / count;
-			console.log('ratio = ' + ratio);
-			if(ratio > 0 && ratio < 1) {
+			while(calculateRatio(totalWidth, count, averageWidth, marginLeft) != 0) {
+				console.log('ratio = ' + calculateRatio(totalWidth, count, averageWidth, marginLeft));
 				marginLeft = calculateMarginLeft(totalWidth, --count, averageWidth);
 				console.log('NEW marginLeft = ' + marginLeft);
 			}
 			
+//			if(ratio > 0 && ratio < 1) {
+//				marginLeft = calculateMarginLeft(totalWidth, --count, averageWidth);
+//				console.log('NEW marginLeft = ' + marginLeft);
+//			}
+			
 			var newProperties = {};
 			newProperties['margin-left'] = marginLeft;
-			if(maxCountByLine < totalCount) {
-				newProperties['margin-top'] = marginLeft;
-			} else {
-				newProperties['margin-top'] = Math.floor(marginLeft / 5);
+			if(options.verticalSpace) {
+				newProperties['margin-top'] = options.verticalSpace;
+				parent.css('padding-bottom', options.verticalSpace);
+				
 			}
+//			if(maxCountByLine < totalCount) {
+//				newProperties['margin-top'] = marginLeft;
+//			} else {
+//				newProperties['margin-top'] = Math.floor(marginLeft / 5);
+//			}
 
 			children.css(newProperties);
 		}
